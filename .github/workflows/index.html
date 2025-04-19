@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INSCRIÇÃO SÍMPOSIO 2025 EBD <BR></BR>
+    Pagamento via Pix</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    button {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #059669;
+    }
+
+    .copied {
+      color: #10b981;
+      margin-top: 10px;
+    }
+
+    .qr-code {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .qr-code img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .whatsapp-button {
+      margin-top: 15px;
+      display: none;
+      text-decoration: none;
+    }
+
+    .whatsapp-button button {
+      background-color: #25D366;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>INSCRIÇÃO SÍMPOSIO 2025 EBD <BR>
+      Pagamento via Pix</h2>
+    <p>Clique no botão abaixo para copiar e pagar com Pix.</p>
+
+    <div id="qrCode" class="qr-code">
+      <img id="qrImage" src="" alt="QR Code Pix" />
+    </div>
+
+    <button onclick="mostrarQrECopiar()">Pagar com Pix</button>
+    <div id="copiedText" class="copied" style="display: none;">Código Pix copiado com sucesso!</div>
+
+    <!-- Botão WhatsApp -->
+    <a href="https://wa.me/559192346353?text=Olá,%20enviei%20o%20comprovante%20do%20Pix%20para%20Midian%20Caldas%20Rodrigues." 
+       target="_blank" id="whatsappLink" class="whatsapp-button">
+      <button>Enviar Comprovante via WhatsApp</button>
+    </a>
+  </div>
+
+  <script>
+    function mostrarQrECopiar() {
+      const pixCode = "00020126580014BR.GOV.BCB.PIX0111736176102005204000053039865802BR5921Midian Caldas Rodrigues6009SAO PAULO6304ABCD";
+      const qrImage = document.getElementById("qrImage");
+      const qrContainer = document.getElementById("qrCode");
+      const copiedText = document.getElementById("copiedText");
+      const whatsappLink = document.getElementById("whatsappLink");
+
+      // Copiar Pix
+      const tempInput = document.createElement("textarea");
+      tempInput.value = pixCode;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      // Exibir QR, mensagem e botão WhatsApp
+      copiedText.style.display = "block";
+      qrContainer.style.display = "block";
+      whatsappLink.style.display = "inline-block";
+
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(pixCode)}&size=200x200`;
+      qrImage.src = qrUrl;
+    }
+  </script>
+</body>
+</html>
+
